@@ -42,6 +42,7 @@ public class Task1 extends JFrame {
 			for (int i = 0; i < buttons.length; i++) {
 				if (e.getSource() == buttons[i]) {
 					counter++;
+					
 					sum += (buttons[i].getText()) + "";
 				}
 				if (counter == 3) {

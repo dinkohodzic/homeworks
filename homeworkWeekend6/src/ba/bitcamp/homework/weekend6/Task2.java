@@ -13,7 +13,8 @@ public class Task2 extends JFrame {
 	private JButton button1 = new JButton("First Name");
 	private JButton button2 = new JButton("Last Name");
 	private JLabel label = new JLabel("Name  LName");
-	public static String characters = "ABCDEFGHIJKLMNOPRSTUVZ";
+	private FirstName firstName = new FirstName();
+	private LastName lastName = new LastName();
 
 	private static final long serialVersionUID = 2888620759776532509L;
 
@@ -39,32 +40,52 @@ public class Task2 extends JFrame {
 	}
 
 	private static class FirstName {
-		public static String name = "Name";
-		
+		private static String firstName;
+		private final static String[] firstNames = { "John", "George", "Oscar",
+				"Natalie", "Susan" };
+
+		public FirstName() {
+			firstName = null;
+		}
+
 		/**
-		 * Generates a random character for the first name
+		 * Generates a random first name
+		 * 
 		 * @return The character
 		 */
-		public static String generateName() {
-			String randomName = name
-					+ characters.charAt((int) (Math.random() * characters
-							.length()));
-			return randomName;
+		public void generateName() {
+			firstName = ""
+					+ firstNames[(int) (Math.random() * firstNames.length)];
+
+		}
+
+		public String toString() {
+			return firstName;
 		}
 	}
 
 	private static class LastName {
-		public static String lastName = "LName";
-		
+		private  static String lastName;
+		private final static String[] lastNames = { "Jones", "Wild", "Martin",
+				"Roberts", "Clinton" };
+
+		public LastName() {
+			lastName = null;
+		}
+
 		/**
-		 * Generates a random character for the last name
+		 * Generates a random last name
+		 * 
 		 * @return The character
 		 */
-		public static String generateLastName() {
-			String randomLastName = lastName
-					+ characters.charAt((int) (Math.random() * characters
-							.length()));
-			return randomLastName;
+		public void generateLastName() {
+			lastName = "" + lastNames[(int) (Math.random() * lastNames.length)];
+			;
+
+		}
+
+		public String toString() {
+			return lastName;
 		}
 	}
 
@@ -73,15 +94,11 @@ public class Task2 extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == button1) {
-				String s = FirstName.generateName()
-						+ label.getText().substring(5);
-				label.setText(s);
+				 firstName.generateName();
 			} else if (e.getSource() == button2) {
-				String s = label.getText().substring(0, 6)
-						+ LastName.generateLastName();
-				label.setText(s);
+				lastName.generateLastName();
 			}
-
+			label.setText(firstName + " " + lastName);
 		}
 
 	}

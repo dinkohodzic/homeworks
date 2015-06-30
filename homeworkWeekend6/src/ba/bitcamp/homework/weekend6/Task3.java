@@ -12,28 +12,20 @@ import javax.swing.JOptionPane;
 public class Task3 extends JFrame {
 
 	private static final long serialVersionUID = -529844628083615961L;
-	//Initializing attributes
-	private JButton[] buttons1 = new JButton[5];
-	private JButton[] buttons2 = new JButton[5];
-	public String[] array = new String[5];
+	// Initializing attributes
+	private JButton[] buttons = new JButton[10];
+	private Integer[] array = new Integer[buttons.length / 2];
+	private Integer counter = 0;
 
 	public Task3() {
-		
-		//Initializing and setting the layout
-		GridLayout layout = new GridLayout();
-		setLayout(new GridLayout(2, 5));
-		
-		for (int i = 0; i < buttons1.length; i++) {
-			buttons1[i] = new JButton(Integer.toString(i));
-			add(buttons1[i]);
-			buttons1[i].addActionListener(new Action());
-		}
-		
-		for (int i = 0; i < buttons2.length; i++) {
 
-			buttons2[i] = new JButton(Integer.toString(i + 5));
-			add(buttons2[i]);
-			buttons2[i].addActionListener(new Action());
+		// Initializing and setting the layout
+		setLayout(new GridLayout(2, 5));
+
+		for (int i = 0; i < buttons.length; i++) {
+			buttons[i] = new JButton("" + i);
+			buttons[i].addActionListener(new Action());
+			add(buttons[i]);
 		}
 
 		setTitle("Task3");
@@ -49,18 +41,20 @@ public class Task3 extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			for (int i = 0; i < buttons1.length; i++) {
-				if (e.getSource() == buttons1[i]) {
-					buttons1[i].setEnabled(false);
-					array[i] = buttons1[i].getText();
-				} else if (e.getSource() == buttons2[i]) {
-					buttons2[i].setEnabled(false);
-					array[i] = buttons2[i].getText();
+			for (int i = 0; i < buttons.length; i++) {
+				if (buttons[i] == e.getSource() && array[i % 5] == null) {
+					buttons[i].setEnabled(false);
+					array[i % 5] = i;
+					counter++;
+
+					if (counter == array.length) {
+						JOptionPane.showMessageDialog(null,
+								Arrays.toString(array));
+						System.exit(0);
+					}
+
 				}
-			}
-			if (array[4] != null) {
-				JOptionPane.showMessageDialog(null, Arrays.toString(array));
-				System.exit(0);
+
 			}
 		}
 	}
