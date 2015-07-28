@@ -20,45 +20,22 @@ public class Task03 {
 		numbers.add(2);
 		numbers.add(5);
 		numbers.add(17);
-
-		// Printing the list.
-		System.out.println("First list: " + numbers);
-
-		// Creating second list.
-		ArrayList<Integer> newNumbers = new ArrayList<Integer>();
-
-		// Creating iterator.
+		
+		//Creating itterator for the list
 		ListIterator<Integer> iter = numbers.listIterator();
 
-		// Going trough first list, from index 0 and adding every second element
-		// into the second list.
-		int count = 0;
 		while (iter.hasNext()) {
-			int number = iter.next();
-			if (count % 2 == 0) {
-				newNumbers.add(number);
+			int temp = iter.next();
+			if (iter.hasNext()) {
+				iter.remove();
+				temp += iter.next();
+				iter.set(temp);
 			}
-			count++;
+
 		}
-
-		// Restarting the iterator.
-		iter = numbers.listIterator();
-
-		// Going trough first list, from index 1 and adding every second element
-		// to the elements in the second list.
-		count = 0;
-		int index = 0;
-		while (iter.hasNext()) {
-			int number = iter.next();
-			if (count % 2 != 0) {
-				newNumbers.set(index, number + newNumbers.get(index));
-				index++;
-			}
-			count++;
-		}
-
-		// Printing second list.
-		System.out.println("Second list: " + newNumbers);
+		//Printing the list
+		System.out.println(numbers);
+	
 
 	}
 
